@@ -5,9 +5,13 @@ import *as usersActions from '../../actions/usersActions';
 import *as publicacionesActions from '../../actions/publicacionesActions';
 import Spinner from '../General/Spinner';
 import Error from '../General/Error';
+import Comentarios from './Comentarios';
 
 const {traerTodos: usuariosTraerTodos} = usersActions;
-const {traerPorUsuario: publicacionesTraerPorUsuario, abrirCerrar} = publicacionesActions;
+const {traerPorUsuario: publicacionesTraerPorUsuario, 
+        abrirCerrar,
+        traerComentarios,
+        } = publicacionesActions;
 
 
 
@@ -67,16 +71,23 @@ const Publicaciones = (props) => {
         publicaciones.map((publicacion, com_key) => (
             <div className='pub_titulo' 
             key={publicacion.id}
-            onClick={() => props.abrirCerrar(pub_key, com_key)}
+            onClick={() => mostrarComentarios(pub_key, com_key, publicacion.comentarios)}
             >
                 <h4>{publicacion.title}</h4>
                 <p>{publicacion.body}</p>
-                {(publicacion.abierto)? 'abierto' : 'cerrado'};
-                {console.log(publicacion.abierto)}
+                {(publicacion.abierto)? < Comentarios comentarios={publicacion.comentarios}/> : ''};
+                
             </div>
         
     ))
     );
+
+    const mostrarComentarios = (pub_key, com_key, comentarios) => {
+        props.abrirCerrar(pub_key, com_key);
+        if(!comentarios.length){
+            props.traerComentarios(pub_key, com_key)
+        }
+    };
 
 
     return (
@@ -91,15 +102,6 @@ const Publicaciones = (props) => {
     )
 
     
-
-/*     const params = useParams();
-    console.log(props);
-    return (
-        <div>
-            <h1>Publicaciones de {props.postId}</h1>
-            <h2>{params.key}</h2>
-        </div>
-    ) */
 }
 
 const mapStateToProps = ({usersReducer, publicacionesReducer}) => {
@@ -110,6 +112,7 @@ const mapDispatchToProps = {
     usuariosTraerTodos,
     publicacionesTraerPorUsuario,
     abrirCerrar,
+    traerComentarios,
 }
 
 
