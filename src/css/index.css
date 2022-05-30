@@ -61,3 +61,7 @@
   .m_left{
     margin-left: 20px;
   }
+
+  a:link{
+    text-decoration: none;
+  }

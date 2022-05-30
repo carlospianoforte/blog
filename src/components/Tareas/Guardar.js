@@ -14,12 +14,15 @@ const Guardar = (props) => {
             tareas,
             cambioUsuarioId,
             cambioTitulo,
+            limpiarForma,
         } = props
 
         if(params.usu_id && params.tar_id){
             const tarea = tareas[params.usu_id][params.tar_id]
             cambioUsuarioId(tarea.userId)
             cambioTitulo(tarea.title)
+        }else{
+            limpiarForma();
         }
    },[]); 
 
@@ -56,9 +59,9 @@ const Guardar = (props) => {
             };
             editar(tarea_editada);
         }else{
-            agregar(nueva_tarea)
-
+            
         }
+        agregar(nueva_tarea)
     }
 
     const deshabilitar = () => {

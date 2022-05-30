@@ -6,6 +6,7 @@ import *as publicacionesActions from '../../actions/publicacionesActions';
 import Spinner from '../General/Spinner';
 import Error from '../General/Error';
 import Comentarios from './Comentarios';
+import '../../css/comentarios.css'
 
 const {traerTodos: usuariosTraerTodos} = usersActions;
 const {traerPorUsuario: publicacionesTraerPorUsuario, 
@@ -19,16 +20,23 @@ const Publicaciones = (props) => {
     const params = useParams();
    
          useEffect(() => {
+            const{usuariosTraerTodos,
+                publicacionesTraerPorUsuario,
+                } = props;
 
-            if(!props.usersReducer.users.length){
-                props.usuariosTraerTodos();
-            }
-            if(props.usersReducer.error){return}
+            (async()=>{
 
-            if(!('publicaciones_key' in props.usersReducer.users[params.key])){
-                props.publicacionesTraerPorUsuario(params.key);
-            }
-        },[]);    
+                if(!props.usersReducer.users.length){
+                    await usuariosTraerTodos();
+                }
+                if(props.usersReducer.error){return}
+    
+                if(!('publicaciones_key' in props.usersReducer.users[params.key])){
+                    await publicacionesTraerPorUsuario(params.key);
+                }
+            })();
+            
+        },[]);
 
     const ponerUsuario = () => {
 
@@ -92,10 +100,10 @@ const Publicaciones = (props) => {
 
     return (
 
-        <div>
+        <div className='comentarios_container_padre'>
             
-            {params.key}
-             {ponerUsuario()}
+{/*             {params.key}
+ */}             {ponerUsuario()}
              {ponerPublicaciones()}
 
         </div>

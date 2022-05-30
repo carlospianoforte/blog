@@ -1,0 +1,11 @@
+.comentarios_container{
+    display: flex;
+    border-radius: 20px;
+    border: 1px solid gray;
+    margin-top: 10px;  
+}
+
+
+.comentarios_container_padre{
+    padding: 20px;
+}

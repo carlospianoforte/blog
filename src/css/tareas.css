@@ -1,0 +1,38 @@
+.tareas_container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn.btn-primary {
+    color: #fff;
+    background-color: #7DCD40;
+    border-color: #7DCD40;
+    border-radius: 5px;
+
+  }
+
+  .btn.btn-danger {
+    color: #fff;
+    background-color: #CD4040;
+    border-color: #CD4040;
+    border-radius: 5px;
+
+  }
+
+  .tareas_buttons button{
+      margin-left: 10px;
+  }
+
+  .tareas_agregar{
+      padding: 20px;
+      text-align: center;
+
+  }
+
+  .tareas_agregar_button{
+    color: #fff;
+    background-color: #fdf7f7;
+    border-color: #6a7e5b;
+    border-radius: 5px;
+    font-size: 20px;
+}

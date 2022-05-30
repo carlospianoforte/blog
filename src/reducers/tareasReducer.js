@@ -5,6 +5,7 @@ import { GET_WORKS,
     CAMBIO_TITULO,
     GUARDAR,
     ACTUALIZAR,
+    LIMPIAR,
     } from "../types/tareasTypes";
 
 
@@ -65,6 +66,13 @@ export default (state = INITIAL_STATE, action) => {
                         return{
                             ...state,
                             tareas: action.payload
+                        }
+
+                    case LIMPIAR:
+                        return{
+                            ...state,
+                            usuario_id:'',
+                            titulo:'',
                         }
 
         default: return state;

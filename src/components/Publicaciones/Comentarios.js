@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import Spinner from '../General/Spinner';
 import Error from '../General/Error';
+import '../../css/comentarios.css'
 
 const Comentarios = (props) => {
     if(props.com_error){
@@ -14,6 +15,8 @@ const Comentarios = (props) => {
     
     const ponerComentarios = () => (
         props.comentarios.map((comentario)=>(
+            <div className='comentarios_container'>
+
             <li>
                 <b>
                     <u>
@@ -23,6 +26,7 @@ const Comentarios = (props) => {
                 <br />
                 {comentario.body}
             </li>
+            </div>
         ))
     );
 

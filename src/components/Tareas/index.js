@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Spinner from '../General/Spinner';
 import Error from '../General/Error';
+import '../../css/tareas.css'
 import * as tareasActions from '../../actions/tareasActions'
 
 const Tareas = (props) => {
@@ -11,7 +12,15 @@ const Tareas = (props) => {
         if(!Object.keys(props.tareas).length){
             props.traerTodas();
         }
-    },[]);  
+    },[]);
+
+    useEffect(() => {
+        const{tareas, loading, traerTodas} = props
+        if(!Object.keys(tareas).length && !loading){
+            traerTodas();
+        }
+    },[props.tareas]);
+    
 
     const mostrarContenido = () => {
         const {tareas, loading, error} = props;
@@ -33,36 +42,45 @@ const Tareas = (props) => {
     }
 
     const ponerTareas = (usu_id) => {
-        const {tareas, cambioCheck} = props;
+        const {tareas, cambioCheck, eliminar} = props;
         const por_usuario = {
             ...tareas[usu_id]
         }
         return Object.keys(por_usuario).map((tar_id)=>(
-            <div key={tar_id} >
+            <div key={tar_id} className = 'tareas_container' >
+                <div>
+
                 <input 
                     type='checkbox' 
                     defaultChecked = {por_usuario[tar_id].completed}
                     onChange = {() => cambioCheck(usu_id, tar_id)} 
                 />
                 {por_usuario[tar_id].title}
-                <button className='m_left' >
-                    <Link to={`/tareas/guardar/${usu_id}/${tar_id}`}>Editar</Link>
-                </button>
- {/*                <button className='m_left' >
-                    <Link>Eliminar</Link>
-                </button> */}
+                </div>
+                
+                <div className='tareas_buttons'>
+                    <button className='btn btn-primary' >
+                        <Link to={`/tareas/guardar/${usu_id}/${tar_id}`}>Editar</Link>
+                    </button>
+                    <button className='btn btn-danger' onClick={()=> eliminar(tar_id)} >
+                        Eliminar
+                    </button> 
+                </div>
             </div>
         ))
     }
 
+    console.log(props.tareas);
 
   return (
     <div>
-        <button>
-            <Link to='/tareas/guardar'>
-                Agregar
-            </Link>
-        </button>
+        <div className='tareas_agregar'>
+            <button className='tareas_agregar_button'>
+                <Link to='/tareas/guardar'>
+                    Agregar
+                </Link>
+            </button>
+        </div>
         {mostrarContenido()}
     </div>
   )
