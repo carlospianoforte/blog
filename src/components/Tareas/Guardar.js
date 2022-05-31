@@ -24,7 +24,7 @@ const Guardar = (props) => {
         }else{
             limpiarForma();
         }
-   },[]); 
+   },[params.tar_id, params.usu_id, props]); 
 
     const cambioUsuarioId = (e) => {
         props.cambioUsuarioId(e.target.value)
