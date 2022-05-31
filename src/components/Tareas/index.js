@@ -12,7 +12,8 @@ const Tareas = (props) => {
         if(!Object.keys(props.tareas).length){
             props.traerTodas();
         }
-    },[props]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
 
     useEffect(() => {
         const{tareas, loading, traerTodas} = props
