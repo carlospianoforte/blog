@@ -12,14 +12,14 @@ const Tareas = (props) => {
         if(!Object.keys(props.tareas).length){
             props.traerTodas();
         }
-    },[]);
+    },[props]);
 
     useEffect(() => {
         const{tareas, loading, traerTodas} = props
         if(!Object.keys(tareas).length && !loading){
             traerTodas();
         }
-    },[props.tareas]);
+    },[props]);
     
 
     const mostrarContenido = () => {
